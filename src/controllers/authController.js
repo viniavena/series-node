@@ -1,5 +1,6 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 const User = require('../models/user');
 
@@ -34,6 +35,8 @@ router.post('/token', async (req, res) => {
     return res.status(400).send({ error: 'Senha inválida' });
 
   user.password = undefined;
+
+  const token = jwt.sign({ id: user.id });
 
   res.send({ user });
 });
