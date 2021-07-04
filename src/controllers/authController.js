@@ -10,6 +10,9 @@ router.post('/register', async (req, res) => {
 
     return res.send({ user });
   } catch (err) {
-    return res.status(400).send({ error: 'Erro ao efetuar cadastro' });
+    console.log(err);
+    return res.status(400).send({ error: 'Erro ao efetuar cadastro!' });
   }
 });
+
+module.exports = app => app.use('/auth', router);
