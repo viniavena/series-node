@@ -8,13 +8,13 @@ module.exports = (req, res, next) => {
 
   const parts = authHeader.split(' ');
 
-  if (parts.lenght != 2) {
+  if (!parts.lenght === 2) {
     return res.status(401).send({ error: 'Erro no token' });
   }
 
   const [scheme, token] = parts;
 
-  if (!scheme.test(/^Bearer$/i))
+  if (!/^Bearer$/i.test(scheme))
     return res.status(401).send({ error: 'Token mal formatado' });
 
   jwt.verify(token, authConfig.secret, (err, decoded) => {
